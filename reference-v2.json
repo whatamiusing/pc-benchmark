@@ -1,0 +1,20 @@
+{
+  "revision": 1,
+  "date": "2026-11-10",
+  "workload": "waiu-windows-workloads-v2",
+  "graphicsFps": [30, 60, 90, 120],
+  "cpuSingle": [650, 1200, 1800, 2400],
+  "cpuParallel": [2500, 5500, 10500, 16500],
+  "ramCopy": [3500, 7000, 11000, 18000],
+  "randomReads": [200, 2500, 8000, 16000],
+  "storageWrite": [100, 300, 800, 1800],
+  "ramEverydayGiB": [4, 8, 16, 32],
+  "ramWorkstationGiB": [8, 16, 32, 64],
+  "cpuNotes": {
+    "i9-13900K": "A high-end 13th-generation desktop CPU with 24 cores and 32 threads, well suited to heavily threaded work."
+  },
+  "gpuNotes": {
+    "NVIDIA GeForce RTX 5070 Ti": "A high-end Blackwell desktop card with 16 GB of graphics memory, designed for demanding gaming and graphics work.",
+    "NVIDIA GeForce GTX 1080": "A former flagship from NVIDIA’s Pascal generation, with 8 GB of graphics memory. It can still handle lighter games, while demanding newer titles may need lower settings."
+  }
+}
