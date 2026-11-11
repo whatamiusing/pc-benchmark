@@ -27,3 +27,7 @@ The report grades Everyday use, Gaming and Workstation against the thresholds it
 The benchmark and report run locally. By default, the app can fetch a public scoring reference from WhatAmIUsing.com. Benchmark results and hardware details stay on your PC. Pass `--offline` to the EXE to use the bundled reference. Clicking the optional BIOS update search opens Google with the motherboard make and model.
 
 For contact details and the site's privacy policy, visit [What Am I Using?](https://www.whatamiusing.com/).
+
+## Licence
+
+The standalone benchmark, including its bundled artwork, is licensed under the [Apache License 2.0](LICENSE). See [NOTICE](NOTICE) for copyright attribution. The EXE includes both texts under **Licence**.

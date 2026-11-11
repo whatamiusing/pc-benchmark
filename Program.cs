@@ -111,6 +111,9 @@ namespace WaiuBenchmark
             confidence.Controls.Add(LabelFor("Results stay on this PC. Open-source release planned.",9,false,Muted));
             confidence.Controls.Add(WebLink("Privacy policy","/privacy/"));
             confidence.Controls.Add(WebLink("Terms and conditions","/terms/"));
+            var licence=new LinkLabel { Text="Licence", AutoSize=true, LinkColor=Blue };
+            licence.LinkClicked+=(sender,args)=>ShowLicence();
+            confidence.Controls.Add(licence);
             Add(shell,confidence,0);
 
             var launch=new TableLayoutPanel { AutoSize=true, AutoSizeMode=AutoSizeMode.GrowAndShrink,
@@ -178,6 +181,30 @@ namespace WaiuBenchmark
                 closeAfterRun = true;
                 StopBenchmark();
             };
+        }
+
+        internal static string LicenceText()
+        {
+            var assembly=Assembly.GetExecutingAssembly();
+            using (var licence=new StreamReader(assembly.GetManifestResourceStream("ApacheLicense.txt")))
+            using (var notice=new StreamReader(assembly.GetManifestResourceStream("BenchmarkNotice.txt")))
+                return notice.ReadToEnd().TrimEnd()+"\r\n\r\n"+licence.ReadToEnd().Replace("\r\n","\n").Replace("\n","\r\n");
+        }
+
+        private void ShowLicence()
+        {
+            using (var dialog=new Form { Text="Licence and notices", StartPosition=FormStartPosition.CenterParent,
+                ClientSize=new Size(670,500), MinimumSize=new Size(350,250), ShowInTaskbar=false })
+            {
+                var text=new TextBox { Text=LicenceText(), Multiline=true, ReadOnly=true, ScrollBars=ScrollBars.Vertical,
+                    Dock=DockStyle.Fill, AccessibleName="Apache 2.0 licence and copyright notice" };
+                var close=new Button { Text="Close", Dock=DockStyle.Bottom, Height=34, DialogResult=DialogResult.OK };
+                dialog.Controls.Add(text);
+                dialog.Controls.Add(close);
+                dialog.CancelButton=close;
+                dialog.Shown+=(sender,args)=> { text.SelectionStart=0; text.SelectionLength=0; };
+                dialog.ShowDialog(this);
+            }
         }
 
         private LinkLabel WebLink(string label,string path)

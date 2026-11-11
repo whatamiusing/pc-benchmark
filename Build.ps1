@@ -16,6 +16,8 @@ $resources = @(
     '/resource:' + (Join-Path $PSScriptRoot 'ReportIcons.svg') + ',ReportIcons.svg'
     '/resource:' + (Join-Path $PSScriptRoot 'reference-v2.json') + ',ReferenceV2.json'
     '/resource:' + (Join-Path $PSScriptRoot 'BenchmarkIcon.svg') + ',BenchmarkIcon.svg'
+    '/resource:' + (Join-Path $PSScriptRoot 'LICENSE') + ',ApacheLicense.txt'
+    '/resource:' + (Join-Path $PSScriptRoot 'NOTICE') + ',BenchmarkNotice.txt'
 )
 foreach ($name in @('processor.jpg','memory.jpg','storage.jpg','inventory.jpg')) {
     $resources += '/resource:' + (Join-Path $PSScriptRoot "stage-art/$name") + ",$name"

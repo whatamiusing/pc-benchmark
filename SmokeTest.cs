@@ -142,6 +142,10 @@ namespace WaiuBenchmark
 
         private static void CheckProfiles()
         {
+            string licence=BenchmarkWindow.LicenceText();
+            Check(licence.Contains("Copyright 2026 Innobella Media Limited") &&
+                licence.Contains("Version 2.0, January 2004") && licence.Contains("END OF TERMS AND CONDITIONS"),
+                "The standalone executable includes the Apache 2.0 licence and attribution.");
             var current=new Result(80,240,5000,Benchmark.WorkerCount,DateTime.Now) { GraphicsTime=10 };
             var before=new Result(100,200,4500,Benchmark.WorkerCount,DateTime.Now.AddHours(-1)) { GraphicsTime=12 };
             current.Metrics=new double[] { 80,240,100,5000,100,10,10,300,200,600 };
@@ -268,6 +272,7 @@ namespace WaiuBenchmark
                 var artwork = controls.OfType<StageArtwork>().Single();
                 var privacy=controls.OfType<LinkLabel>().Single(link=>link.Text=="Privacy policy");
                 var terms=controls.OfType<LinkLabel>().Single(link=>link.Text=="Terms and conditions");
+                var licence=controls.OfType<LinkLabel>().Single(link=>link.Text=="Licence");
                 Exception failure = null;
                 form.Shown += async (sender, args) =>
                 {
@@ -283,6 +288,8 @@ namespace WaiuBenchmark
                         Check(!strip.Visible && !stop.Visible && !artwork.Visible,"The launch screen hides test controls and artwork.");
                         Check(privacy.Visible && terms.Visible && client.Contains(terms.RectangleToScreen(terms.ClientRectangle)),
                             "The footer links are visible on the compact launch screen.");
+                        Check(licence.Visible && client.Contains(licence.RectangleToScreen(licence.ClientRectangle)),
+                            "The licence link fits in the compact window.");
                         string ready=Environment.GetEnvironmentVariable("WAIU_SMOKE_READY");
                         if (!string.IsNullOrEmpty(ready))
                             using (var readyImage=new Bitmap(form.Width,form.Height))
